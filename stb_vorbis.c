@@ -1869,7 +1869,7 @@ static int codebook_decode_deinterleave_repeat(vorb *f, Codebook *c, float **out
 }
 
 #ifndef STB_VORBIS_DIVIDES_IN_CODEBOOK
-static int codebook_decode_deinterleave_repeat_2(vorb *f, Codebook *c, float **outputs, int *c_inter_p, int *p_inter_p, int len, int total_decode)
+static inline int codebook_decode_deinterleave_repeat_2(vorb *f, Codebook *c, float **outputs, int *c_inter_p, int *p_inter_p, int len, int total_decode)
 {
    int c_inter = *c_inter_p;
    int p_inter = *p_inter_p;

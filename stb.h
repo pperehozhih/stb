@@ -3848,7 +3848,7 @@ struct stb__st_##TYPE {                                                       \
    VALUE ev; VALUE dv;                                                        \
 };                                                                            \
                                                                               \
-static unsigned int STB_(N, hash)(KEY k)                                      \
+static inline unsigned int STB_(N, hash)(KEY k)                                      \
 {                                                                             \
    HASH                                                                       \
 }                                                                             \
@@ -3952,7 +3952,7 @@ PREFIX int STB__(N,getkey)(TYPE *a, KEY k, KEY *kout)                           
    }                                                                          \
 }                                                                             \
                                                                               \
-static int STB_(N,addset)(TYPE *a, KEY k, VALUE v,                            \
+static inline int STB_(N,addset)(TYPE *a, KEY k, VALUE v,                            \
                              int allow_new, int allow_old, int copy)          \
 {                                                                             \
    unsigned int h = STB_(N, hash)(k);                                         \
@@ -4051,7 +4051,7 @@ PREFIX TYPE * STB__(NC, copy)(TYPE *a)                                        \
    return h;                                                                  \
 }                                                                             \
                                                                               \
-static void STB_(N, rehash)(TYPE *a, int count)                               \
+static inline void STB_(N, rehash)(TYPE *a, int count)                               \
 {                                                                             \
    int i;                                                                     \
    TYPE b;                                                                    \
@@ -4186,7 +4186,7 @@ static stb__ptrpair stb__ptrpair_del   = { (void *) 2, (void *) 2 };
 
 #define STB__equal_ptrpair(x,y) ((x).a == (y).a && (x).b == (y).b)
 
-stb_define_hash_base(static, stb_spmatrix, int val_size; void *arena;, stb__spmatrix_,stb__spmatrix_, 0.85,
+stb_define_hash_base(static inline, stb_spmatrix, int val_size; void *arena;, stb__spmatrix_,stb__spmatrix_, 0.85,
      stb__ptrpair, stb__ptrpair_empty, stb__ptrpair_del,
      STB_nocopy, STB_nodelete, STB_nosafe,
      STB__equal_ptrpair, STB__equal_ptrpair, return stb_rehash(stb_hashptr(k.a))+stb_hashptr(k.b);,
@@ -9114,7 +9114,7 @@ static char *stb__reg_parse(stb_matcher *matcher, int start, char *regex, stb_ui
 
             // leading ] is special
             if (*regex == ']') {
-               flags[']'] = 1;
+               flags[(unsigned char)']'] = 1;
                ++regex;
             }
             while (*regex != ']') {
@@ -11154,7 +11154,7 @@ stb_arith_symstate *stb_arith_state_create(int num_sym)
    return s;
 }
 
-static void stb_arith_state_rescale(stb_arith_symstate *s)
+static inline void stb_arith_state_rescale(stb_arith_symstate *s)
 {
    if (s->pow2 < POW2_LIMIT) {
       int pcf, cf, cf_next, next, i;
