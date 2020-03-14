@@ -5025,7 +5025,7 @@ STB_EXTERN int     stb_feq(char *s1, char *s2);
 STB_EXTERN time_t  stb_ftimestamp(char *filename);
 
 STB_EXTERN int     stb_fullpath(char *abs, int abs_size, const char *rel);
-STB_EXTERN FILE *  stb_fopen(const char *filename, const char *mode);
+STB_EXTERN FILE *  stb_fopen(char *filename, char *mode);
 STB_EXTERN int     stb_fclose(FILE *f, int keep);
 
 enum
@@ -5422,7 +5422,7 @@ typedef struct
    int   errors;
 } stb__file_data;
 
-FILE *  stb_fopen(const char *filename, const char *mode)
+FILE *  stb_fopen(char *filename, char *mode)
 {
    FILE *f;
    char name_full[4096];
